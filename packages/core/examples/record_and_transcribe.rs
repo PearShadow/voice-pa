@@ -52,7 +52,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Encode to WAV
     println!("\n4. Encoding to WAV...");
     let encoder = WavEncoder::new();
-    let wav_data = encoder.encode(&audio_data, 16000, 1)?;
+    let actual_rate = recorder.actual_sample_rate();
+    let actual_channels = recorder.actual_channels();
+    println!("   ℹ️  Actual config: {} Hz, {} channels", actual_rate, actual_channels);
+    
+    let wav_data = encoder.encode(&audio_data, actual_rate, actual_channels)?;
     println!("   ✓ Encoded to WAV");
     println!("   📦 WAV file size: {} bytes", wav_data.len());
 

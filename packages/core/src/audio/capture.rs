@@ -33,6 +33,7 @@ pub struct AudioRecorder {
     stream: Option<Stream>,
     buffer: Arc<Mutex<Vec<f32>>>,
     is_recording: Arc<Mutex<bool>>,
+    actual_config: Arc<Mutex<Option<StreamConfig>>>,
 }
 
 impl AudioRecorder {
@@ -56,6 +57,7 @@ impl AudioRecorder {
             stream: None,
             buffer: Arc::new(Mutex::new(Vec::new())),
             is_recording: Arc::new(Mutex::new(false)),
+            actual_config: Arc::new(Mutex::new(None)),
         })
     }
 
@@ -98,6 +100,9 @@ impl AudioRecorder {
         stream.play()?;
         self.stream = Some(stream);
         *is_recording = true;
+        
+        let mut actual = self.actual_config.lock().unwrap();
+        *actual = Some(stream_config.clone());
 
         log::info!("Recording started with config: {:?}", stream_config);
         Ok(())
@@ -135,11 +140,25 @@ impl AudioRecorder {
         &self.config
     }
 
+    /// Get the actual sample rate being used
+    pub fn actual_sample_rate(&self) -> u32 {
+        let actual = self.actual_config.lock().unwrap();
+        actual.as_ref().map(|c| c.sample_rate.0).unwrap_or(self.config.sample_rate)
+    }
+
+    /// Get the actual channels being used
+    pub fn actual_channels(&self) -> u16 {
+        let actual = self.actual_config.lock().unwrap();
+        actual.as_ref().map(|c| c.channels).unwrap_or(self.config.channels)
+    }
+
     /// Get the duration of recorded audio in seconds
     pub fn duration(&self) -> f64 {
         let buffer = self.buffer.lock().unwrap();
         let samples = buffer.len() as f64;
-        samples / (self.config.sample_rate as f64 * self.config.channels as f64)
+        let rate = self.actual_sample_rate() as f64;
+        let channels = self.actual_channels() as f64;
+        samples / (rate * channels)
     }
 }
 
