@@ -1,0 +1,7 @@
+[[example]]
+name = "record_and_transcribe"
+path = "examples/record_and_transcribe.rs"
+
+[[example]]
+name = "transcribe_file"
+path = "examples/transcribe_file.rs"
