@@ -1,12 +1,11 @@
-namespace voice_pa {
-    // Audio recording
-    interface MobileRecorder {
-        constructor();
-        [Async]
-        void start();
-        [Async]
-        sequence<f32> stop();
-        boolean is_recording();
-        f64 duration();
-    };
+namespace voice_pa_core {};
+
+interface MobileRecorder {
+    constructor();
+    [Async]
+    void start();
+    [Async]
+    sequence<f32> stop();
+    boolean is_recording();
+    f64 duration();
 };

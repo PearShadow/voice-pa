@@ -21,7 +21,7 @@ tokio = { version = "1.35", features = ["full"] }
 futures = "0.3"
 
 # HTTP client for STT API
-reqwest = { version = "0.11", features = ["json", "multipart", "stream"] }
+reqwest = { version = "0.11", default-features = false, features = ["rustls-tls", "json", "multipart", "stream"] }
 
 # Serialization
 serde = { version = "1.0", features = ["derive"] }
@@ -36,7 +36,7 @@ log = "0.4"
 env_logger = "0.11"
 
 # FFI bindings
-uniffi = "0.26"
+uniffi = { version = "0.26", features = ["cli"] }
 
 # Audio preprocessing
 dasp = "0.11"
@@ -69,3 +69,7 @@ path = "examples/record_and_transcribe.rs"
 [[example]]
 name = "transcribe_file"
 path = "examples/transcribe_file.rs"
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
