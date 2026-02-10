@@ -32,17 +32,17 @@ Voice PA uses a **high-performance Rust core library** that powers all platforms
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                  Client Layer                        │
+│                  Client Layer                       │
 │  Mobile App  │  Extensions  │  Web Dashboard        │
 └─────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────┐
-│              Rust Core Library                       │
+│              Rust Core Library                      │
 │  Audio Capture │ Transcription │ Diarization        │
 └─────────────────────────────────────────────────────┘
                         ↓
 ┌─────────────────────────────────────────────────────┐
-│              Backend Services                        │
+│              Backend Services                       │
 │  REST API  │  WebSocket  │  Job Queue               │
 └─────────────────────────────────────────────────────┘
 ```
