@@ -51,7 +51,7 @@ router.post('/signin', signInValidation, async (req: Request, res: Response) => 
  * POST /api/auth/signout
  * Sign out a user
  */
-router.post('/signout', async (req: Request, res: Response) => {
+router.post('/signout', async (_req: Request, res: Response) => {
     res.json({ message: 'Signed out successfully' });
 });
 

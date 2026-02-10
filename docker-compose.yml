@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: voicepa
       POSTGRES_PASSWORD: dev_password_change_in_production
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

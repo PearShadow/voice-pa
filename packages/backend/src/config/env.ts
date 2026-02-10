@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 import { resolve } from 'path';
 
 // Load environment variables
-config({ path: resolve(__dirname, '../.env') });
+config({ path: resolve(__dirname, '../../.env') });
 
 export const env = {
     // Server
@@ -27,6 +27,12 @@ export const env = {
 
     // OpenAI
     OPENAI_API_KEY: process.env.OPENAI_API_KEY!,
+
+    // Twilio
+    TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
+    TWILIO_WHATSAPP_NUMBER: process.env.TWILIO_WHATSAPP_NUMBER,
+    TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER,
 
     // Storage
     STORAGE_ENDPOINT: process.env.STORAGE_ENDPOINT!,

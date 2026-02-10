@@ -132,6 +132,8 @@ enum Platform {
   MOBILE
   MEET
   ZOOM
+  WHATSAPP
+  PHONE
 }
 
 enum MeetingStatus {
